@@ -11,14 +11,8 @@ Windows system tray app for toggling dark/light mode with a single click.
 
 ## Build
 
-### MinGW
 ```bash
 g++ -DUNICODE -D_UNICODE -O2 -mwindows main.cpp TrayIcon.cpp ThemeToggle.cpp Settings.cpp -luser32 -lshell32 -ladvapi32 -lcomctl32 -lgdi32 -o ThemeSwitch.exe
-```
-
-### Visual Studio
-```cmd
-build.bat
 ```
 
 ## Usage
