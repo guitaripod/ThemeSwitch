@@ -1,35 +1,31 @@
 # ThemeSwitch
 
-A lightweight Windows 11 system tray application for toggling between dark and light themes.
+Windows system tray app for toggling dark/light mode with a single click.
 
 ## Features
-- Single-click toggle between dark and light mode (system + apps)
-- Customizable hotkey (default: Win+Shift+D)
+- Single-click dark/light mode toggle
+- Win+Shift+D hotkey
 - Start with Windows option
-- Dynamic tray icon that changes with theme
-- Native Win32 implementation (~50KB executable)
+- Pine rose themed settings
+- ~90KB standalone executable
 
-## Building
+## Build
 
-### Prerequisites
-- Visual Studio 2022 Build Tools or Visual Studio 2022
-- Windows SDK
+### MinGW
+```bash
+g++ -DUNICODE -D_UNICODE -O2 -mwindows main.cpp TrayIcon.cpp ThemeToggle.cpp Settings.cpp -luser32 -lshell32 -ladvapi32 -lcomctl32 -lgdi32 -o ThemeSwitch.exe
+```
 
-### Build Instructions
-1. Open Developer Command Prompt for VS 2022
-2. Navigate to project directory
-3. Run: `build.bat`
-
-### Manual Build
+### Visual Studio
 ```cmd
-rc.exe /fo resource.res resource.rc
-cl.exe /EHsc /W3 /O2 main.cpp TrayIcon.cpp ThemeToggle.cpp Settings.cpp resource.res user32.lib shell32.lib advapi32.lib comctl32.lib /Fe:ThemeSwitch.exe
+build.bat
 ```
 
 ## Usage
-- **Left-click tray icon**: Toggle theme
-- **Right-click tray icon**: Open menu
-- **Win+Shift+D**: Toggle theme (customizable)
+- **Left-click**: Toggle theme
+- **Right-click**: Settings/Exit
+- **Win+Shift+D**: Toggle theme
 
-## Note
-You'll need to provide `light.ico` and `dark.ico` icon files (16x16 or 32x32) for the tray icons.
+## Notes
+- Add `dark.ico` and `light.ico` (16x16) for custom tray icons
+- Works on Windows 10/11
