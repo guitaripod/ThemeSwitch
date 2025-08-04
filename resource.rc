@@ -1,0 +1,25 @@
+#include "resource.h"
+#include <windows.h>
+
+IDI_LIGHT ICON "light.ico"
+IDI_DARK ICON "dark.ico"
+
+IDD_SETTINGS DIALOGEX 0, 0, 250, 180
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ThemeSwitch Settings"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Settings", IDC_STATIC, 10, 10, 230, 110
+    AUTOCHECKBOX    "Start with Windows", IDC_CHECK_STARTUP, 20, 30, 200, 10
+    AUTOCHECKBOX    "Change tray icon with theme", IDC_CHECK_ICON, 20, 50, 200, 10
+    
+    LTEXT           "Hotkey:", IDC_STATIC, 20, 75, 40, 8
+    LTEXT           "Win+Shift+D", IDC_HOTKEY_DISPLAY, 65, 75, 80, 8
+    PUSHBUTTON      "Change", IDC_BUTTON_CHANGE_HOTKEY, 150, 72, 50, 14
+    
+    LTEXT           "Current theme: Dark Mode", IDC_THEME_STATUS, 10, 130, 230, 8
+    LTEXT           "Version: 1.0.0", IDC_VERSION, 10, 145, 230, 8
+    
+    DEFPUSHBUTTON   "OK", IDOK, 140, 160, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 195, 160, 50, 14
+END
