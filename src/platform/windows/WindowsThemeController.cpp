@@ -1,12 +1,13 @@
-#include "ThemeToggle.h"
+#include "WindowsThemeController.h"
 
-ThemeToggle::ThemeToggle() {
+#ifndef WM_THEMECHANGED
+#define WM_THEMECHANGED 0x031A
+#endif
+
+WindowsThemeController::WindowsThemeController() {
 }
 
-ThemeToggle::~ThemeToggle() {
-}
-
-DWORD ThemeToggle::ReadThemeValue(const wchar_t* valueName) {
+DWORD WindowsThemeController::readThemeValue(const wchar_t* valueName) const {
     HKEY hKey;
     DWORD value = 0;
     DWORD dataSize = sizeof(DWORD);
@@ -19,7 +20,7 @@ DWORD ThemeToggle::ReadThemeValue(const wchar_t* valueName) {
     return value;
 }
 
-void ThemeToggle::WriteThemeValue(const wchar_t* valueName, DWORD value) {
+void WindowsThemeController::writeThemeValue(const wchar_t* valueName, DWORD value) {
     HKEY hKey;
     
     if (RegOpenKeyEx(HKEY_CURRENT_USER, PERSONALIZE_KEY, 0, KEY_WRITE, &hKey) == ERROR_SUCCESS) {
@@ -28,7 +29,7 @@ void ThemeToggle::WriteThemeValue(const wchar_t* valueName, DWORD value) {
     }
 }
 
-void ThemeToggle::BroadcastThemeChange() {
+void WindowsThemeController::broadcastThemeChange() {
     SendNotifyMessage(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)L"ImmersiveColorSet");
     Sleep(50);
     SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)L"ImmersiveColorSet", 
@@ -39,18 +40,17 @@ void ThemeToggle::BroadcastThemeChange() {
     SendNotifyMessage(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)L"WindowsThemeElement");
 }
 
-bool ThemeToggle::IsLightMode() {
-    return ReadThemeValue(SYSTEM_THEME_VALUE) == 1;
+bool WindowsThemeController::isLightMode() const {
+    return readThemeValue(SYSTEM_THEME_VALUE) == 1;
 }
 
-void ThemeToggle::Toggle() {
-    bool currentlyLight = IsLightMode();
-    SetTheme(!currentlyLight);
-}
-
-void ThemeToggle::SetTheme(bool lightMode) {
+void WindowsThemeController::setTheme(bool lightMode) {
     DWORD value = lightMode ? 1 : 0;
-    WriteThemeValue(SYSTEM_THEME_VALUE, value);
-    WriteThemeValue(APPS_THEME_VALUE, value);
-    BroadcastThemeChange();
+    writeThemeValue(SYSTEM_THEME_VALUE, value);
+    writeThemeValue(APPS_THEME_VALUE, value);
+    broadcastThemeChange();
+}
+
+void WindowsThemeController::toggle() {
+    setTheme(!isLightMode());
 }
