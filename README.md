@@ -6,7 +6,6 @@ Windows system tray app for toggling dark/light mode with a single click.
 - Single-click dark/light mode toggle
 - Win+Shift+D hotkey
 - Start with Windows option
-- Pine rose themed settings
 - ~90KB standalone executable
 
 ## Build
