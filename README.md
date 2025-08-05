@@ -79,8 +79,9 @@ g++ -DUNICODE -D_UNICODE -O2 -mwindows main.cpp Application.cpp ^
 cd src
 g++ -O2 -std=c++17 main.cpp Application.cpp platform/linux/*.cpp \
     -I. -I/usr/include/qt6 -I/usr/include/qt6/QtCore \
-    -I/usr/include/qt6/QtWidgets -I/usr/include/KF6/KGlobalAccel \
-    -lQt6Core -lQt6Widgets -lKF6GlobalAccel \
+    -I/usr/include/qt6/QtWidgets -I/usr/include/qt6/QtGui \
+    -I/usr/include/qt6/QtDBus -I/usr/include/KF6/KGlobalAccel \
+    -lQt6Core -lQt6Widgets -lQt6Gui -lQt6DBus -lKF6GlobalAccel \
     -fPIC -o ../ThemeSwitch
 ```
 
