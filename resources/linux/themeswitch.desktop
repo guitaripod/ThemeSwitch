@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ThemeSwitch
+Comment=Toggle between dark and light themes
+Exec=ThemeSwitch
+Icon=themeswitch
+Categories=Utility;Settings;
+Keywords=theme;dark;light;toggle;switch;
