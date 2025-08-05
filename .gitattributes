@@ -1,0 +1,8 @@
+# Mark non-C++ files as vendored or generated to exclude from language statistics
+*.cmake linguist-vendored
+CMakeLists.txt linguist-vendored
+*.rc linguist-vendored
+*.qrc linguist-vendored
+*.desktop linguist-vendored
+*.svg linguist-vendored
+*.md linguist-documentation
